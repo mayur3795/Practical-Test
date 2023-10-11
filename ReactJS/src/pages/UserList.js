@@ -44,6 +44,22 @@ const UserList = () => {
     fetchUserData();
   }, []);
 
+  useEffect(() => {
+    if (userDataList?.length) {
+      setInterval(() => {
+        let data = userDataList.map((a) => ({
+          ...a,
+          score: Math.floor(100000 + Math.random() * 900000),
+        }));
+
+        data = data.sort((a, b) => {
+          return b.score - a.score;
+        });
+        setUserDataList(data);
+      }, 3000);
+    }
+  }, [userDataList]);
+
   return (
     <Container maxWidth="md">
       <Box sx={{ my: 4 }}>
